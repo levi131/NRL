@@ -1,10 +1,10 @@
 # NativeRL
 
-NativeRL 是一个由 levi131 发起并维护的轻量级强化学习框架，直接基于原生 PyTorch 开发。它不是在 vllm、sglang、Megatron 等大型框架上做缝合或二次封装，而是从 PyTorch 原生构建分布式训练与推理能力，旨在为研究和工程中需要灵活并行策略与混合训练/推理流程的场景提供简洁、高效的工具。
+NativeRL 是一个轻量级强化学习框架，直接基于原生 PyTorch 开发。它不是在 vllm、sglang、Megatron 等大型框架上做缝合或二次封装，而是从 PyTorch 原生构建分布式训练与推理能力，旨在为研究和工程中需要灵活并行策略与混合训练/推理流程的场景提供简洁、高效的工具。
 
 ## 主要特点
 
-- 原生 PyTorch 实现：不依赖大型第三方 RL 平台，便于理解与扩展。 
+- 原生 PyTorch 实现：不依赖大型第三方训练或推理框架，更加专注于解决强化学习这一场景下的 infra 问题。 
 - 支持常见算法：目前包含 DPO（Direct Preference Optimization）、PPO（Proximal Policy Optimization）、GRPO 等常见强化学习算法。
 - 分布式支持：基于 PyTorch DTensor 体系实现分布式能力，支持不同的分布式并行策略（数据并行、模型并行、张量分割等）。
 - 训练/推理同进程切换：训练与推理两个阶段可以在同一进程中交替进行，便于实现在线评估、交互式学习和自适应训练策略。
@@ -96,8 +96,6 @@ NativeRL 基于 PyTorch DTensor 实现分布式能力，支持：
 - 保持代码风格与现有仓库一致。
 - 对于性能相关改动，提供基准或对比数据。
 
-作者：levi131
-
 ## 许可
 
 请参考仓库根目录下的 LICENSE 文件（如无则联系作者）。
@@ -105,4 +103,3 @@ NativeRL 基于 PyTorch DTensor 实现分布式能力，支持：
 ## 联系方式
 
 如有问题或建议，请通过仓库 Issue 或直接联系作者（levi131）。
-# NativeRL
