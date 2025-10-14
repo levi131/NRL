@@ -1,0 +1,116 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+build/
+dist/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Local settings
+local_settings.py
+db.sqlite3
+
+# Sphinx documentation
+docs/_build/
+
+# Editors
+.idea/
+.vscode/
+
+# mypy
+.mypy_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+/.python-version
+
+# celery
+celerybeat-schedule
+
+# Virtualenv
+venv/
+ENV/
+env/
+
+# Spyder
+.spyproject
+
+# Rope
+.ropeproject
+
+# mkdocs
+site/
+
+# Machine learning artifacts
+*.h5
+*.pt
+*.pth
+*.ckpt
+*.model
+*.onnx
+*.bin
+
+# Logs and local outputs
+*.log
+logs/
+runs/
+tensorboard/
+
+# Datasets and cache
+data/
+dataset/
+datasets/
+cache/
+cachedir/
+
+# Checkpoints
+checkpoints/
+checkpoint/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# Secrets
+*.pem
+*.key
+secrets/
