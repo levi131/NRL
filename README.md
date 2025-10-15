@@ -70,3 +70,5 @@ python -m torch.distributed.run --nproc_per_node=<N> nrl/entry.py examples/ardf/
 ## License
 
 See the `LICENSE` file in the repository root. Use Issues for questions or contact the maintainers.
+
+This project is licensed under the Apache License 2.0. See `LICENSE` for details.
