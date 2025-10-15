@@ -8,14 +8,14 @@ Interactive documentation (default English, one-click 切换中文) is published
 
 https://levi131.github.io/NativeRL/
 
-Quick start
+## Quick start
 
 ```
 pip install -r requirements.txt
 python3 nrl/entry.py examples/ardf/config.py
 ```
 
-License
+## License
 
 This project is licensed under the Apache License 2.0 — see `LICENSE` for details.
 
