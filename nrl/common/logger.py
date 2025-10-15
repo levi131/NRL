@@ -122,8 +122,8 @@ _GLOBAL_LOCK = threading.Lock()
 _GLOBAL_LOGGER: Optional[NRLLogger] = None
 
 
-def get_global_logger() -> NRLLogger:
-    """Return the module-level singleton logger (lazy, thread-safe)."""
+def get_nrl_logger() -> NRLLogger:
+    """Return the module-level singleton NRL logger (lazy, thread-safe)."""
     global _GLOBAL_LOGGER
     if _GLOBAL_LOGGER is None:
         with _GLOBAL_LOCK:
@@ -132,17 +132,20 @@ def get_global_logger() -> NRLLogger:
     return _GLOBAL_LOGGER
 
 
-def set_global_logger(logger: NRLLogger) -> None:
-    """Replace the module-level singleton logger (for tests or customization)."""
+def set_nrl_logger(logger: NRLLogger) -> None:
+    """Replace the module-level singleton NRL logger (for tests or customization)."""
     global _GLOBAL_LOGGER
     with _GLOBAL_LOCK:
         _GLOBAL_LOGGER = logger
 
 
 def get_logger() -> NRLLogger:
-    """Compatibility alias: return the global NRLLogger singleton."""
-    return get_global_logger()
+    """Compatibility alias: return the NRL logger singleton.
+
+    This kept for backward compatibility (no name argument).
+    """
+    return get_nrl_logger()
 
 
 # module-level convenience alias
-global_logger = get_global_logger()
+nrl_logger = get_nrl_logger()

@@ -16,79 +16,71 @@ import importlib
 import logging
 
 
-def test_logger_cache_and_handlers(caplog):
-    # import module directly to avoid stale references
-    mod = importlib.import_module("nrl.common.logger")
-    importlib.reload(mod)
+class TestNRLLogger:
+    def test_handlers_and_capture(self, caplog):
+        # import module directly to avoid stale references
+        mod = importlib.import_module("nrl.common.logger")
+        importlib.reload(mod)
 
-    get_logger = mod.get_logger
+        get_nrl = mod.get_nrl_logger
+        l1 = get_nrl()
 
-    l1 = get_logger("modA")
-    l2 = get_logger("modA")
-    assert l1 is l2, "get_logger should return cached wrapper for same name"
+        # handlers should not be duplicated
+        assert len(l1.logger.handlers) == 1
 
-    # handlers should not be duplicated
-    assert len(l1.logger.handlers) == 1
+        # check that info logs are captured
+        with caplog.at_level(logging.INFO):
+            l1.info("hello from global")
+        assert any(r.levelno == logging.INFO and "hello from global" in r.getMessage() for r in caplog.records)
 
-    # check that info logs are captured
-    with caplog.at_level(logging.INFO):
-        l1.info("hello from modA")
-    assert any(r.levelno == logging.INFO and "hello from modA" in r.getMessage() for r in caplog.records)
+    def test_singleton_and_setter(self, caplog):
+        mod = importlib.import_module("nrl.common.logger")
+        importlib.reload(mod)
 
+        get_nrl = mod.get_nrl_logger
+        set_nrl = mod.set_nrl_logger
+        NRLLogger = mod.NRLLogger
 
-def test_global_logger_singleton_and_setter(caplog):
-    mod = importlib.import_module("nrl.common.logger")
-    importlib.reload(mod)
+        g1 = get_nrl()
+        g2 = get_nrl()
+        assert g1 is g2
 
-    get_global = mod.get_global_logger
-    set_global = mod.set_global_logger
-    NRLLogger = mod.NRLLogger
+        # replace global
+        new = NRLLogger()
+        set_nrl(new)
+        assert get_nrl() is new
 
-    g1 = get_global()
-    g2 = get_global()
-    assert g1 is g2
+        with caplog.at_level(logging.INFO):
+            get_nrl().info("global replaced")
+        assert any(r.levelno == logging.INFO and "global replaced" in r.getMessage() for r in caplog.records)
 
-    # replace global
-    new = NRLLogger("nrl_replacement")
-    set_global(new)
-    assert get_global() is new
+    def test_env_level_controls_new_logger(self, caplog, monkeypatch):
+        # ensure clean import and no cached wrappers
+        module = importlib.import_module("nrl.common.logger")
+        # set env to DEBUG
+        monkeypatch.setenv("NRL_LOG_LEVEL", "DEBUG")
+        importlib.reload(module)
 
-    with caplog.at_level(logging.INFO):
-        get_global().info("global replaced")
-    assert any(r.levelno == logging.INFO and "global replaced" in r.getMessage() for r in caplog.records)
+        lg = module.get_nrl_logger()
 
+        # capture debug output
+        with caplog.at_level(logging.DEBUG):
+            lg.debug("debugging env_test")
 
-def test_env_level_controls_new_logger(caplog, monkeypatch):
-    # ensure clean import and no cached wrappers
-    module = importlib.import_module("nrl.common.logger")
-    # set env to DEBUG
-    monkeypatch.setenv("NRL_LOG_LEVEL", "DEBUG")
-    importlib.reload(module)
+        assert any(r.levelno == logging.DEBUG and "debugging env_test" in r.getMessage() for r in caplog.records)
 
-    get_logger = module.get_logger
-    lg = get_logger("env_test")
+    def test_exception_logs_exc_info(self, caplog):
+        mod = importlib.import_module("nrl.common.logger")
+        importlib.reload(mod)
+        lg = mod.get_nrl_logger()
 
-    # capture debug output
-    with caplog.at_level(logging.DEBUG):
-        lg.debug("debugging env_test")
+        try:
+            raise ValueError("boom")
+        except ValueError:
+            with caplog.at_level(logging.ERROR):
+                lg.exception("caught error")
 
-    assert any(r.levelno == logging.DEBUG and "debugging env_test" in r.getMessage() for r in caplog.records)
-
-
-def test_exception_logs_exc_info(caplog):
-    mod = importlib.import_module("nrl.common.logger")
-    importlib.reload(mod)
-    get_logger = mod.get_logger
-
-    lg = get_logger("exc_test")
-
-    try:
-        raise ValueError("boom")
-    except ValueError:
-        with caplog.at_level(logging.ERROR):
-            lg.exception("caught error")
-
-    found = [r for r in caplog.records if r.levelno == logging.ERROR and "caught error" in r.getMessage()]
-    assert found, "exception log should be emitted"
-    # ensure exc_info present on the record
-    assert any(r.exc_info is not None for r in found)
+        found = [r for r in caplog.records if r.levelno == logging.ERROR and "caught error" in r.getMessage()]
+        assert found, "exception log should be emitted"
+        # ensure exc_info present on the record
+        assert any(r.exc_info is not None for r in found)

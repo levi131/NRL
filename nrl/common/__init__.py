@@ -12,6 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .logger import NRLLogger, get_global_logger, get_logger, global_logger, set_global_logger
+from .logger import NRLLogger, get_nrl_logger, nrl_logger, set_nrl_logger
 
-__all__ = ["get_logger", "get_global_logger", "set_global_logger", "global_logger", "NRLLogger"]
+__all__ = ["get_nrl_logger", "set_nrl_logger", "nrl_logger", "NRLLogger"]
