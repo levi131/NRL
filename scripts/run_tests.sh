@@ -26,4 +26,10 @@ export PYTHONPATH="${ROOT_DIR}:${PYTHONPATH}"
 cd "${ROOT_DIR}"
 
 echo "Running tests from ${ROOT_DIR} with PYTHONPATH=${PYTHONPATH}"
-pytest -q "$@"
+
+# If no args provided, run the entire tests/ directory. Otherwise forward args to pytest.
+if [ "$#" -eq 0 ]; then
+	pytest -q tests
+else
+	pytest -q "$@"
+fi
