@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NativeRL — Documentation (EN / 中文)</title>
+  <style>
+    :root{--bg:#0f1720;--card:#0b1220;--text:#e6eef8;--muted:#9fb0c8;--accent:#2b8be6}
+    body{font-family:Inter, Roboto, Arial, sans-serif;background:#fff;color:#111;margin:0;padding:0}
+    header{background:#f7fafc;border-bottom:1px solid #e6edf3;padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
+    h1{margin:0;font-size:20px}
+    .controls{display:flex;gap:8px;align-items:center}
+    .btn{background:var(--accent);color:white;border:0;padding:8px 12px;border-radius:6px;cursor:pointer;font-weight:600}
+    .btn.secondary{background:#6b7280}
+    main{max-width:960px;margin:28px auto;padding:0 20px}
+    section{margin-bottom:28px}
+    pre{background:#0f1720;color:#e6eef8;padding:12px;border-radius:6px;overflow:auto}
+    .muted{color:#6b7280}
+    .badge{display:inline-block;padding:4px 8px;border-radius:6px;background:#eef2ff;color:#1e3a8a;font-weight:600;margin-right:8px}
+    nav a{color:var(--accent);text-decoration:none}
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>NativeRL</h1>
+      <div class="muted">A lightweight native-PyTorch reinforcement learning framework</div>
+    </div>
+    <div class="controls">
+      <div class="badge" id="lang-badge">EN</div>
+      <button class="btn" id="toggle-btn">切换到中文</button>
+      <a class="btn secondary" href="/">View repository</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- English content (default) -->
+    <section id="en">
+      <h2>Overview</h2>
+      <p>NativeRL is a lightweight reinforcement learning framework built directly on PyTorch primitives. It focuses on being modular, easy to extend, and suitable for research and engineering workflows without depending on large external infra.</p>
+
+      <h3>Main features</h3>
+      <ul>
+        <li>Native PyTorch implementation (no heavy external infra).</li>
+        <li>Common algorithms implemented (PPO, DPO, GRPO, ...).</li>
+        <li>Distributed support using PyTorch primitives and DTensor (data/model/tensor parallelism).</li>
+        <li>Support for running training and inference within the same process for easy online evaluation.</li>
+        <li>Modular design — easy to replace or extend algorithms, policies and backends.</li>
+      </ul>
+
+      <h3>Repository layout</h3>
+      <ul>
+        <li><code>nrl/</code> — core package (entry, algorithms, training, distributed utilities)</li>
+        <li><code>examples/</code> — runnable examples and configs (e.g., <code>examples/ardf</code>)</li>
+        <li><code>scripts/</code>, <code>tests/</code> — helper scripts and tests</li>
+      </ul>
+
+      <h3>Installation</h3>
+      <p>Prerequisites: Python and a matching PyTorch build (install a CUDA-enabled PyTorch for GPU usage).</p>
+      <pre><code># create a virtualenv
+pip install -r requirements.txt
+      </code></pre>
+
+      <h3>Quick start — run the ardf example</h3>
+      <p>Run the repository entry with the example config:</p>
+      <pre><code>python3 nrl/entry.py examples/ardf/config.py
+      </code></pre>
+
+      <h3>Distributed example</h3>
+      <pre><code>python -m torch.distributed.run --nproc_per_node=&lt;N&gt; nrl/entry.py examples/ardf/config.py
+      </code></pre>
+
+      <h3>Contributing</h3>
+      <ul>
+        <li>Open an Issue to discuss large changes before implementation.</li>
+        <li>Provide or update examples and tests when adding features.</li>
+        <li>Include benchmarks for performance-sensitive changes.</li>
+      </ul>
+
+      <h3>License & Contact</h3>
+      <p>See the <a href="/blob/main/LICENSE">LICENSE</a> file in the repository root. Use Issues for questions or contact the maintainers.</p>
+    </section>
+
+    <!-- Chinese content -->
+    <section id="zh" style="display:none">
+      <h2>中文 — 概览</h2>
+      <p>NativeRL — 基于原生 PyTorch 的轻量级强化学习框架。</p>
+
+      <h3>主要特性</h3>
+      <ul>
+        <li>原生 PyTorch 实现（不依赖大型外部 infra）。</li>
+        <li>常见算法实现：DPO、PPO、GRPO 等。</li>
+        <li>基于 PyTorch DTensor 的分布式支持（数据/模型/张量并行、切分等）。</li>
+        <li>支持在同一进程中进行训练与推理，便于在线评估。</li>
+        <li>模块化设计：便于替换或扩展算法、策略与后端。</li>
+      </ul>
+
+      <h3>项目结构（高层）</h3>
+      <ul>
+        <li><code>nrl/</code> — 核心包（入口、算法、训练、分布式工具）</li>
+        <li><code>examples/</code> — 可运行示例与配置（例如 <code>examples/ardf</code>）</li>
+        <li><code>scripts/</code>, <code>tests/</code> — 实用脚本与测试</li>
+      </ul>
+
+      <h3>安装</h3>
+      <pre><code># 使用虚拟环境
+pip install -r requirements.txt
+      </code></pre>
+
+      <h3>快速开始 — 运行 `ardf` 示例</h3>
+      <pre><code>python3 nrl/entry.py examples/ardf/config.py
+      </code></pre>
+
+      <h3>分布式运行（示例）</h3>
+      <pre><code>python -m torch.distributed.run --nproc_per_node=&lt;N&gt; nrl/entry.py examples/ardf/config.py
+      </code></pre>
+
+      <h3>贡献</h3>
+      <ul>
+        <li>在提交大改动前建议先通过 Issue 讨论设计。</li>
+        <li>增加功能时请提供或更新示例和测试用例。</li>
+        <li>对性能相关改动建议附带基准或对比数据。</li>
+      </ul>
+
+      <h3>许可与联系方式</h3>
+      <p>详见仓库根目录下的 <code>LICENSE</code> 文件。如有问题，请通过 Issue 联系维护者。</p>
+    </section>
+
+    <footer class="muted" style="margin-top:36px">Interactive docs hosted via GitHub Pages. To enable: go to your repository Settings → Pages, set Source to <code>main</code> branch and the <code>/docs</code> folder. The URL will be: <strong>https://levi131.github.io/NativeRL/</strong></footer>
+  </main>
+
+  <script>
+    const btn = document.getElementById('toggle-btn');
+    const badge = document.getElementById('lang-badge');
+    const en = document.getElementById('en');
+    const zh = document.getElementById('zh');
+    function setLang(l){
+      if(l==='zh'){
+        en.style.display='none'; zh.style.display='block'; badge.textContent='中文'; btn.textContent='Switch to English';
+      } else {
+        en.style.display='block'; zh.style.display='none'; badge.textContent='EN'; btn.textContent='切换到中文';
+      }
+      try{localStorage.setItem('nrl_lang', l);}catch(e){}
+    }
+    btn.addEventListener('click', ()=>{
+      const cur = localStorage.getItem('nrl_lang') || 'en';
+      setLang(cur==='en' ? 'zh' : 'en');
+    });
+    // initialize from preference or default to EN
+    const pref = (localStorage.getItem('nrl_lang') || 'en');
+    setLang(pref);
+  </script>
+</body>
+</html>
