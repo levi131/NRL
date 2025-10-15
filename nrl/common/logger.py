@@ -29,7 +29,7 @@ from __future__ import annotations
 import logging
 import os
 import threading
-from typing import Dict, Optional
+from typing import Optional
 
 _LEVEL_MAP = {
     "DEBUG": logging.DEBUG,
@@ -63,15 +63,15 @@ class NRLLogger:
     once per underlying logger to avoid duplicate output.
     """
 
-    def __init__(self, name: Optional[str] = None) -> None:
-        self._name = name or "nrl"
+    def __init__(self) -> None:
+        # single global logger name
+        self._name = "nrl_logger"
         self._logger = logging.getLogger(self._name)
         self._configure()
 
     def _configure(self) -> None:
-        if getattr(self._logger, "_nrl_configured", False):
-            return
-
+        # Always update the level from environment, but avoid adding
+        # duplicate handlers if the logger was previously configured.
         level = _get_level_from_env()
         self._logger.setLevel(level)
         if not self._logger.handlers:
@@ -79,7 +79,12 @@ class NRLLogger:
             ch.setLevel(level)
             ch.setFormatter(_make_formatter())
             self._logger.addHandler(ch)
+        else:
+            # update existing handlers to the current level
+            for h in self._logger.handlers:
+                h.setLevel(level)
 
+        # mark configured so other systems know we've set it up
         self._logger._nrl_configured = True  # type: ignore[attr-defined]
 
     # convenience methods
@@ -123,7 +128,7 @@ def get_global_logger() -> NRLLogger:
     if _GLOBAL_LOGGER is None:
         with _GLOBAL_LOCK:
             if _GLOBAL_LOGGER is None:
-                _GLOBAL_LOGGER = NRLLogger("nrl")
+                _GLOBAL_LOGGER = NRLLogger()
     return _GLOBAL_LOGGER
 
 
@@ -134,20 +139,9 @@ def set_global_logger(logger: NRLLogger) -> None:
         _GLOBAL_LOGGER = logger
 
 
-# Cache for named NRLLogger wrappers to avoid re-wrapping frequently
-_LOGGER_CACHE: Dict[str, NRLLogger] = {}
-_CACHE_LOCK = threading.Lock()
-
-
-def get_logger(name: Optional[str] = None) -> NRLLogger:
-    """Return a (cached) NRLLogger for the given name."""
-    key = name or "nrl"
-    with _CACHE_LOCK:
-        if key in _LOGGER_CACHE:
-            return _LOGGER_CACHE[key]
-        wrapper = NRLLogger(name=key)
-        _LOGGER_CACHE[key] = wrapper
-        return wrapper
+def get_logger() -> NRLLogger:
+    """Compatibility alias: return the global NRLLogger singleton."""
+    return get_global_logger()
 
 
 # module-level convenience alias
