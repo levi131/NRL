@@ -139,13 +139,5 @@ def set_nrl_logger(logger: NRLLogger) -> None:
         _GLOBAL_LOGGER = logger
 
 
-def get_logger() -> NRLLogger:
-    """Compatibility alias: return the NRL logger singleton.
-
-    This kept for backward compatibility (no name argument).
-    """
-    return get_nrl_logger()
-
-
 # module-level convenience alias
 nrl_logger = get_nrl_logger()
