@@ -1,4 +1,4 @@
-# Contributing to NativeRL
+# Contributing to NRL
 
 Thanks for your interest in contributing! This file contains a short guide to help you get started.
 

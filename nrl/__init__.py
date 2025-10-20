@@ -12,6 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""NativeRL package initializer."""
+"""NRL package initializer."""
 
 __all__ = []

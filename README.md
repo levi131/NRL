@@ -1,4 +1,4 @@
-[![Docs](https://img.shields.io/badge/docs-online-brightgreen)](https://levi131.github.io/NativeRL/)
+[![Docs](https://img.shields.io/badge/docs-online-brightgreen)](https://levi131.github.io/NRL/)
 
 # Introduction
 
@@ -6,7 +6,7 @@ A lightweight reinforcement learning framework built on native PyTorch primitive
 
 Interactive documentation (default English, one-click 切换中文) is published via GitHub Pages:
 
-https://levi131.github.io/NativeRL/
+https://levi131.github.io/NRL/
 
 # Quick start
 

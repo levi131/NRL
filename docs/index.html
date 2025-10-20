@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>NativeRL — Documentation (EN / 中文)</title>
+  <title>NRL — Documentation (EN / 中文)</title>
   <style>
     :root{--bg:#0f1720;--card:#0b1220;--text:#e6eef8;--muted:#9fb0c8;--accent:#2b8be6}
     body{font-family:Inter, Roboto, Arial, sans-serif;background:#fff;color:#111;margin:0;padding:0}
@@ -23,7 +23,7 @@
 <body>
   <header>
     <div>
-      <h1>NativeRL</h1>
+      <h1>NRL</h1>
       <div class="muted">A lightweight native-PyTorch reinforcement learning framework</div>
     </div>
     <div class="controls">
@@ -37,7 +37,7 @@
     <!-- English content (default) -->
     <section id="en">
       <h2>Overview</h2>
-      <p>NativeRL is a lightweight reinforcement learning framework built directly on PyTorch primitives. It focuses on being modular, easy to extend, and suitable for research and engineering workflows without depending on large external infra.</p>
+      <p>NRL is a lightweight reinforcement learning framework built directly on PyTorch primitives. It focuses on being modular, easy to extend, and suitable for research and engineering workflows without depending on large external infra.</p>
 
       <h3>Main features</h3>
       <ul>
@@ -57,18 +57,15 @@
 
       <h3>Installation</h3>
       <p>Prerequisites: Python and a matching PyTorch build (install a CUDA-enabled PyTorch for GPU usage).</p>
-      <pre><code># create a virtualenv
-pip install -r requirements.txt
-      </code></pre>
+  <pre><code># create a virtualenv
+pip install -r requirements.txt</code></pre>
 
       <h3>Quick start — run the ardf example</h3>
       <p>Run the repository entry with the example config:</p>
-      <pre><code>python3 nrl/entry.py examples/ardf/config.py
-      </code></pre>
+  <pre><code>python3 nrl/entry.py examples/ardf/config.py</code></pre>
 
       <h3>Distributed example</h3>
-      <pre><code>python -m torch.distributed.run --nproc_per_node=&lt;N&gt; nrl/entry.py examples/ardf/config.py
-      </code></pre>
+  <pre><code>python -m torch.distributed.run --nproc_per_node=&lt;N&gt; nrl/entry.py examples/ardf/config.py</code></pre>
 
       <h3>Contributing</h3>
       <ul>
@@ -79,8 +76,7 @@ pip install -r requirements.txt
 
       <h3>Running tests</h3>
       <p>Use the helper script in the repository root to run tests (it sets <code>PYTHONPATH</code> so the local package is loaded):</p>
-      <pre><code>bash scripts/run_tests.sh
-      </code></pre>
+  <pre><code>bash scripts/run_tests.sh</code></pre>
       <p>See <a href="/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> for more details.</p>
 
       <h3>License & Contact</h3>
@@ -90,7 +86,7 @@ pip install -r requirements.txt
     <!-- Chinese content -->
     <section id="zh" style="display:none">
       <h2>中文 — 概览</h2>
-      <p>NativeRL — 基于原生 PyTorch 的轻量级强化学习框架。</p>
+      <p>NRL — 基于原生 PyTorch 的轻量级强化学习框架。</p>
 
       <h3>主要特性</h3>
       <ul>
@@ -109,17 +105,14 @@ pip install -r requirements.txt
       </ul>
 
       <h3>安装</h3>
-      <pre><code># 使用虚拟环境
-pip install -r requirements.txt
-      </code></pre>
+  <pre><code># 使用虚拟环境
+pip install -r requirements.txt</code></pre>
 
       <h3>快速开始 — 运行 `ardf` 示例</h3>
-      <pre><code>python3 nrl/entry.py examples/ardf/config.py
-      </code></pre>
+  <pre><code>python3 nrl/entry.py examples/ardf/config.py</code></pre>
 
       <h3>分布式运行（示例）</h3>
-      <pre><code>python -m torch.distributed.run --nproc_per_node=&lt;N&gt; nrl/entry.py examples/ardf/config.py
-      </code></pre>
+  <pre><code>python -m torch.distributed.run --nproc_per_node=&lt;N&gt; nrl/entry.py examples/ardf/config.py</code></pre>
 
       <h3>贡献</h3>
       <ul>
@@ -130,15 +123,14 @@ pip install -r requirements.txt
 
       <h3>运行测试</h3>
       <p>请使用仓库根目录下的脚本来运行测试（脚本会把仓库根加入 <code>PYTHONPATH</code>，以便加载本地包）：</p>
-      <pre><code>bash scripts/run_tests.sh
-      </code></pre>
+  <pre><code>bash scripts/run_tests.sh</code></pre>
       <p>更多说明见 <a href="/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>。</p>
 
       <h3>许可与联系方式</h3>
       <p>详见仓库根目录下的 <code>LICENSE</code> 文件。如有问题，请通过 Issue 联系维护者。</p>
     </section>
 
-    <footer class="muted" style="margin-top:36px">Interactive docs hosted via GitHub Pages. To enable: go to your repository Settings → Pages, set Source to <code>main</code> branch and the <code>/docs</code> folder. The URL will be: <strong>https://levi131.github.io/NativeRL/</strong></footer>
+    <footer class="muted" style="margin-top:36px">Interactive docs hosted via GitHub Pages. To enable: go to your repository Settings → Pages, set Source to <code>main</code> branch and the <code>/docs</code> folder. The URL will be: <strong>https://levi131.github.io/NRL/</strong></footer>
   </main>
 
   <script>
