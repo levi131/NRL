@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from .checkpoint import CkptMgr
 from .logger import NRLLogger, get_nrl_logger, nrl_logger, set_nrl_logger
 
-__all__ = ["get_nrl_logger", "set_nrl_logger", "nrl_logger", "NRLLogger"]
+__all__ = ["CkptMgr", "get_nrl_logger", "set_nrl_logger", "nrl_logger", "NRLLogger"]
